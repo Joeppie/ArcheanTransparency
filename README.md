@@ -5,8 +5,8 @@ This would be very tedious to do manually on larger constructions and its much q
 
 # Usage
 Using it, you will need to navigate to where your crafts are stored; this tends to be a location like:
-`C:\Program Files (x86)\Steam\steamapps\common\Archean\Archean-data\client\blueprints\mycraft.json` it makes sense to save the resulting output from the tool under a new name, or the same name, if you're okay with not having a bcakup.
-The game will instnatly
+`C:\Program Files (x86)\Steam\steamapps\common\Archean\Archean-data\client\blueprints\mycraft.json` it makes sense to save the resulting output from the tool under a new name, or the same name, if you're okay with not having a backup.
+The game will instantly reload the craft from the bleuprint tool so you can immediately spawn in the updated version if you're in game.
 
 Visit the tool by clicking [here](https://joeppie.github.io/ArcheanTransparency/main.html)
 
