@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Color Replacer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        textarea {
+            width: 45%;
+            height: 400px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>JSON Colors Replacer</h1>
+    <p>Enter a JSON structure in the input below. All numbers in any "colors" array will be replaced by 160.</p>
+
+    <div class="container">
+        <textarea id="inputJson" placeholder="Enter JSON here..."></textarea>
+        <textarea id="outputJson" placeholder="Modified JSON will appear here..." readonly></textarea>
+    </div>
+    <button onclick="processJson()">Replace Colors</button>
+
+    <script>
+        function replaceColorsWith160(jsonData) {
+            function replaceColors(obj) {
+                if (Array.isArray(obj)) {
+                    return obj.map(item => replaceColors(item));
+                } else if (typeof obj === 'object' && obj !== null) {
+                    for (let key in obj) {
+                        if (key === 'colors' && Array.isArray(obj[key])) {
+                            obj[key] = obj[key].map(() => 160);
+                        } else {
+                            obj[key] = replaceColors(obj[key]);
+                        }
+                    }
+                }
+                return obj;
+            }
+            
+            try {
+                let parsedJson = JSON.parse(jsonData);
+                let updatedJson = replaceColors(parsedJson);
+                return JSON.stringify(updatedJson, null, 2);
+            } catch (error) {
+                return 'Invalid JSON input';
+            }
+        }
+
+        function processJson() {
+            const inputJson = document.getElementById('inputJson').value;
+            const outputJson = replaceColorsWith160(inputJson);
+            document.getElementById('outputJson').value = outputJson;
+        }
+    </script>
+
+</body>
+</html>
